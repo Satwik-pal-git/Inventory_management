@@ -16,18 +16,22 @@ import Axios from "axios";
 // ];
 
 const ShowItems=({showModal})=>{
-  const [data, setData]= useState([]);
+  const [data, setData]= useState([]);  
+  console.log(`${process.env.REACT_APP_MY_BASE_URL}`);
+  
   useEffect(()=>{
-    Axios.get("http://localhost:5000/").then((response)=>{
+    Axios.get(`${process.env.BASE_URL}`).then((response)=>{
       setData(response.data);
     }).catch((error)=>{
       console.log(error);
     })
   },[]);
+
   const [checkboxes, setCheckboxes] = useState(data);
   // const [checkboxAll, setcheckboxAll] = useState(false);
   // const handleAllCheckboxChange= ()=>{
   // };
+
     const calc = (num1, num2) => {
       return num1 * num2;
     };
