@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import "./ShowItem.css";
 import Axios from "axios";
 
+const BASE_URL="https://inventory-management-backend-nine.vercel.app/";
 
 // const tableData=[
 //   { id:1, checked: false, itemName: "Warree", itemCode:506 , Category: "Panel", stockQty: "40 Unit", stockHold:"0 Unit", stockValue: 0, purchasePrice:0 },
@@ -17,10 +18,9 @@ import Axios from "axios";
 
 const ShowItems=({showModal})=>{
   const [data, setData]= useState([]);  
-  console.log(`${process.env.REACT_APP_MY_BASE_URL}`);
   
   useEffect(()=>{
-    Axios.get(`${process.env.BASE_URL}`).then((response)=>{
+    Axios.get(`${BASE_URL}`).then((response)=>{
       setData(response.data);
     }).catch((error)=>{
       console.log(error);

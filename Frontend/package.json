@@ -1,5 +1,6 @@
 {
   "name": "solar",
+  "homepage": "https://inventory-management-livid.vercel.app/react-app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
