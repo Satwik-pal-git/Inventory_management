@@ -1,0 +1,14 @@
+.tabs{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows:auto;
+    width: 100vw;
+}
+.tabItem{
+    display: flex;
+    justify-content: center;
+    font-weight: 700;
+    font-size: large;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgb(194, 189, 189);
+}

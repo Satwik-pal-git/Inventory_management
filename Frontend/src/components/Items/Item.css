@@ -1,0 +1,32 @@
+.dropdown{
+    width: 10vw;
+}
+.Stock_filter{
+    padding: 10px;
+    display: flex;
+}
+
+.wrapper{
+    display: flex;
+    margin-left: auto;
+}
+.stock_item{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    z-index: 1;
+}
+.wrapper button{
+    padding: 10px;
+    border: 1px solid rgb(152, 148, 148);
+    background-color: white;
+    border-radius: 5px;
+}
+.stock_item .add{
+    padding : 10px;
+    background-color: rgb(87, 87, 220);
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
