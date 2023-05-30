@@ -13,9 +13,15 @@ exports.getDetails = async (req, res) => {
 
 exports.setDetail = async (req, res) => {
     const formData = req.body;
-    if (formData.itemId !== undefined) {
+    const existData = await Detail.findOne({ _id: formData._id });
+    if ((formData.itemId !== undefined) || (existData !== null)) {  // here itemId is same as _id in DB
         try {
-            const toFind = { _id: formData.itemId };
+            var toFind;
+            if (formData.itemId !== undefined) {
+                toFind = { _id: formData.itemId };
+            } else {
+                toFind = { _id: formData._id };
+            }
             await Detail.updateOne(toFind, formData);
             res.status(200).json({
                 message: "data updated successfully"

@@ -1,0 +1,64 @@
+.EditModal{
+    margin:0;
+    box-sizing: border-box;
+    height: auto;
+    width: 30vw;
+    height: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+}
+
+.formToEdit{
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 2vw;
+    padding-left: 4vw;
+    padding-right: 3vw;
+    border-radius: 10px;
+    overflow: scroll;
+    border: 1px solid black;  
+}
+.stock_items{
+    font-weight: 700;
+    padding-top: 1vw;
+    color: rgb(123, 122, 122);
+}
+.stock_items span{
+    color: black;
+}
+.final_val{
+    font-weight: 700;
+    padding-top: 1vw;
+    color: black;
+}
+.gcp-input-container {
+    margin-top: 30px;
+}
+.gcp-label{
+font-size: small;
+}
+.edit_stock{
+padding : 10px;
+background-color: rgb(87, 87, 220);
+color: white;
+border: none;
+border-radius: 5px;
+}
+.stock_buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
+.cancel_stock{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    color: rgb(119, 118, 118);
+    border: 1px solid rgb(119, 118, 118);
+}

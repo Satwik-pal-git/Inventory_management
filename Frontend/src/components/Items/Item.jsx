@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import './Item.css';
 import Select from 'react-dropdown-select';
 import AddItem from "./AddItem";
+import { AiTwotoneDelete } from "react-icons/ai";
 import ShowItems from "./ShowItems"
 
 
@@ -39,7 +40,7 @@ const Item = () => {
                         <Select className="dropdown" placeholder="All         " options={options} value={item} onChange={(values) => setItem(values)} />
                     </div>
                     {/* <div className="stock_item">DELETE SELECTED BUTTON</div> */}
-                    <div className="stock_item"><button className="delete"> DELETED SELECTED</button></div>
+                    <div className="stock_item"><button className="delete"> <AiTwotoneDelete size={20} style={{ marginBottom: "-4px"}} /> DELETED SELECTED</button></div>
                     <div className="stock_item"><button className="add" onClick={setModal}> + &nbsp; ADD TO INVENTORY</button></div>
                     {/* <div className="stock_item"></div> */}
                 </div>

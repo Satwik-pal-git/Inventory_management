@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import "./AddItem.css";
 import "./InputLabel.css";
 import Axios from "axios";
+import { SlClose } from "react-icons/sl";
 
 const BASE_URL="https://inventory-management-backend-nine.vercel.app/";
 const LOCAL_URL="http://localhost:5000";
@@ -78,7 +79,7 @@ const AddItem = ({closeModalEdit, inventData})=>{
                         <h2>Edit Item</h2>
                     </div>
                     <div className="cross" onClick={closeModalEdit}>
-                        X
+                        <SlClose/>
                     </div>
                 </div>
                 <hr className="abcd"/>

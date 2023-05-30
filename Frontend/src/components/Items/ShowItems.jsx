@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from "react";
 import "./ShowItem.css";
 import EditItem from "./EditItem";
+import EditStock from "./EditStock";
 import Axios from "axios";
+import { MdModeEditOutline } from "react-icons/md";
 
 const BASE_URL="https://inventory-management-backend-nine.vercel.app/";
 const LOCAL_URL="http://localhost:5000";
@@ -21,7 +23,9 @@ const LOCAL_URL="http://localhost:5000";
 const ShowItems=()=>{
   const [data, setData]= useState([]);  
   const [Modal, setModal]= useState(false);
+  const [stockModal, setStockModal]= useState(false);
   const [inventData, setInventData]= useState({});
+  const [stockData, setStockData]= useState({});
   
   useEffect(()=>{
     Axios.get(BASE_URL).then((response)=>{
@@ -42,13 +46,18 @@ const ShowItems=()=>{
     const handleEdit = (id)=>{
       setModal(true);
       const foundElement = data.find(item => item._id === id);
-      console.log(foundElement);
-      console.log(id);
       setInventData(foundElement);
+    };
+
+    const handleStockEdit = (id)=>{
+      setStockModal(true);
+      const foundElement = data.find(item => item._id === id);
+      setStockData(foundElement);
     };
 
     const closeModal = ()=>{
       setModal(false);
+      setStockModal(false);
     };
 
     const handleCheckboxChange = (id) => {
@@ -105,9 +114,12 @@ const ShowItems=()=>{
           <td>{element.stockHold}</td>
           <td>{`${calc(element.purchasePrice,element.openingStock)}`}</td>
           <td>{element.purchasePrice}</td>
-          <td>
+          <td className="edit">
+            <div className="editPen" onClick={()=> handleEdit(element._id)}>
+              <MdModeEditOutline />
+            </div>
             <div className="adjust">
-              <button onClick={()=> handleEdit(element._id)}> &nbsp; ADJUST STOCK &nbsp;</button>
+              <button onClick={()=> handleStockEdit(element._id)}> &nbsp; ADJUST STOCK &nbsp;</button>
             </div>
           </td>
         </tr>
@@ -115,6 +127,7 @@ const ShowItems=()=>{
       </tbody>
     </table>
       {Modal && <EditItem closeModalEdit={closeModal} inventData={inventData}/>}
+      {stockModal && <EditStock closeStockModal={closeModal} stockData={stockData}/>}
       </>
   
     );

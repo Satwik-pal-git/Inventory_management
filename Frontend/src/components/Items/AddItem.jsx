@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import "./AddItem.css";
 import "./InputLabel.css";
 import Axios from "axios";
+import { SlClose } from "react-icons/sl";
 
 const BASE_URL="https://inventory-management-backend-nine.vercel.app/";
 const LOCAL_URL="http://localhost:5000";
@@ -74,7 +75,7 @@ const AddItem = ({closeModal})=>{
                         <h2>Create Item</h2>
                     </div>
                     <div className="cross" onClick={closeModal}>
-                        X
+                        <SlClose/>
                     </div>
                 </div>
                 <hr className="abcd"/>
@@ -139,7 +140,7 @@ const AddItem = ({closeModal})=>{
                                     <label className="gcp-label">Unit</label>
                                 </div>
                                 <div className="gcp-input-container">
-                                    <input type="text" name="openingStock" value={formData.openingStock} onChange={handleInputChange} className="gcp-input" required />
+                                    <input type="number" name="openingStock" value={formData.openingStock} onChange={handleInputChange} className="gcp-input" required />
                                     <label className="gcp-label">Opening Stock</label>
                                 </div>
                                 <div className="gcp-input-container">
@@ -147,7 +148,7 @@ const AddItem = ({closeModal})=>{
                                     <label className="gcp-label-date">As of Date</label>
                                 </div>
                             </div>
-                            <div className="toggle-container">
+                            <div className="togg le-container">
                                 {/* <input type="checkbox" onChange={handleInputChange} classclassName="toggle-input" id="toggle" />
                                 <label class="toggle-label" for="toggle"></label> */}
                             </div>
@@ -156,7 +157,7 @@ const AddItem = ({closeModal})=>{
                             <div className="Heading_details"><h3>Pricing Details</h3></div>
                             <div className="wrapper_heading">
                                 <div className="gcp-input-container">
-                                    <input type="text" value={formData.purchasePrice} name="purchasePrice" onChange={handleInputChange} className="gcp-input" required />
+                                    <input type="number" value={formData.purchasePrice} name="purchasePrice" onChange={handleInputChange} className="gcp-input" required />
                                     <label className="gcp-label">Purchase Price</label>
                                 </div>  
                                 <div className="gcp-input-container">

@@ -12,3 +12,11 @@
     padding-bottom: 5px;
     border-bottom: 1px solid rgb(194, 189, 189);
 }
+.tabItem:first-child{
+    color: blue;
+}
+
+.icon{
+    padding-right: 5px;
+    margin-top: 2px;
+}
