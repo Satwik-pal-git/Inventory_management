@@ -44,7 +44,7 @@ const Item = () => {
                     {/* <div className="stock_item"></div> */}
                 </div>
             </div>
-            <ShowItems showModal={setModal}/>
+            <ShowItems/>
           </>
     );
 }

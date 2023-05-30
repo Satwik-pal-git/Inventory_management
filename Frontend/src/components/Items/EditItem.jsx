@@ -5,25 +5,25 @@ import Axios from "axios";
 
 const BASE_URL="https://inventory-management-backend-nine.vercel.app/";
 
-const AddItem = ({closeModal})=>{
+const AddItem = ({closeModalEdit, inventData})=>{
     const [selectedImage, setSelectedImage] = useState(null);
-
+    // console.log("in editItem=, ", inventData);
     const [formData, setFormData] = useState({
-        img: '',
-        itemName: '',
-        category: '',
-        itemCode: '',
-        itemDescription: '',
-        unit: '',
-        openingStock: '',
-        date: '',
-        purchasePrice: '',
-        tax: '',
+        img: inventData.img,
+        itemName: inventData.itemName,
+        category: inventData.category,
+        itemCode: inventData.itemCode,
+        itemDescription: inventData.itemDescription,
+        unit: inventData.unit,
+        openingStock: inventData.openingStock,
+        date: inventData.date,
+        purchasePrice: inventData.purchasePrice,
+        tax: inventData.tax,
       });
     
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-        
+
     };
     
     const handleImageUpload = (event) => {
@@ -35,14 +35,19 @@ const AddItem = ({closeModal})=>{
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response= await Axios.post("http://localhost:5000", formData, {
+            console.log("invent= ", inventData);
+            const newData = {...formData, itemId: inventData._id}; 
+            // setFormData({...formData, itemId: inventData._id});
+            console.log(newData);
+            console.log("in edit=", newData.itemId);
+            const response= await Axios.post("http://localhost:5000", newData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }
             });
             if(response.status===200)
             {
-                // console.log("data is sent to server");
+                console.log("data is updated to server");
                 setFormData({ 
                     img: '',
                     itemName: '',
@@ -55,7 +60,7 @@ const AddItem = ({closeModal})=>{
                     purchasePrice: '',
                     tax: '',
                 });
-                closeModal();
+                closeModalEdit();
             }else {
                 console.log("data is not sent to server");
             }
@@ -69,9 +74,9 @@ const AddItem = ({closeModal})=>{
             <form onSubmit={handleSubmit} className="formToAdd">
                 <div className="MyModal">
                     <div className="text">
-                        <h2>Create Item</h2>
+                        <h2>Edit Item</h2>
                     </div>
-                    <div className="cross" onClick={closeModal}>
+                    <div className="cross" onClick={closeModalEdit}>
                         X
                     </div>
                 </div>
@@ -174,8 +179,7 @@ const AddItem = ({closeModal})=>{
                         </div>
                     </div>
                     <div className="buttons">
-                        <button className="" type="submit" >SAVE</button>
-                        <button className="reset" > RESET</button>
+                        <button className="" type="submit" >EDIT</button>
                     </div>
                 </div>
             </form>
