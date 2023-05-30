@@ -4,6 +4,7 @@ import "./InputLabel.css";
 import Axios from "axios";
 
 const BASE_URL="https://inventory-management-backend-nine.vercel.app/";
+const LOCAL_URL="http://localhost:5000";
 
 const AddItem = ({closeModalEdit, inventData})=>{
     const [selectedImage, setSelectedImage] = useState(null);
@@ -40,7 +41,7 @@ const AddItem = ({closeModalEdit, inventData})=>{
             // setFormData({...formData, itemId: inventData._id});
             console.log(newData);
             console.log("in edit=", newData.itemId);
-            const response= await Axios.post("http://localhost:5000", newData, {
+            const response= await Axios.post(BASE_URL, newData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }

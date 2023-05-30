@@ -4,6 +4,7 @@ import EditItem from "./EditItem";
 import Axios from "axios";
 
 const BASE_URL="https://inventory-management-backend-nine.vercel.app/";
+const LOCAL_URL="http://localhost:5000";
 
 // const tableData=[
 //   { id:1, checked: false, itemName: "Warree", itemCode:506 , Category: "Panel", stockQty: "40 Unit", stockHold:"0 Unit", stockValue: 0, purchasePrice:0 },
@@ -23,7 +24,7 @@ const ShowItems=()=>{
   const [inventData, setInventData]= useState({});
   
   useEffect(()=>{
-    Axios.get("http://localhost:5000").then((response)=>{
+    Axios.get(BASE_URL).then((response)=>{
       setData(response.data);
     }).catch((error)=>{
       console.log(error);

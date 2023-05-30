@@ -4,6 +4,8 @@ import "./InputLabel.css";
 import Axios from "axios";
 
 const BASE_URL="https://inventory-management-backend-nine.vercel.app/";
+const LOCAL_URL="http://localhost:5000";
+
 
 const AddItem = ({closeModal})=>{
     const [selectedImage, setSelectedImage] = useState(null);
@@ -35,7 +37,7 @@ const AddItem = ({closeModal})=>{
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response= await Axios.post("http://localhost:5000", formData, {
+            const response= await Axios.post(BASE_URL, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }
