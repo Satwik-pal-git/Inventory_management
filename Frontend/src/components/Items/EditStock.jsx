@@ -22,15 +22,9 @@ const EditStock = ({closeStockModal, stockData})=> {
         try {
             editedData.openingStock= stockQty;
             // setEditedData({...editedData, [editedData.openingStock]:stockQty});
-            const res= await Axios.post(BASE_URL, editedData);
-            if(res.status===200)
-            {
-                setEditedData({});
-                closeStockModal();
-            }
-            else {
-                console.log("unable to update the stock quantity: ");
-            }
+            await Axios.post(BASE_URL, editedData);
+            setEditedData({});
+            closeStockModal();
         } catch (error) {
             console.log(error);
         }

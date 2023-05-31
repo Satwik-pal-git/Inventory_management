@@ -37,13 +37,8 @@ const Item = () => {
         {
             try {
                 // console.log("in delete = ", deleteId);
-                const res = await Axios.post(BASE_URL, [deleteId]);
+                await Axios.post(BASE_URL, [deleteId]);
                 setDisabledButton(true);
-                if(res.status===200){     // 
-                    console.log("data deleted successfully");
-                }else {
-                    console.log("Unable to deleted te data");
-                }
             } catch (error) {
                 console.log("Error= ", error);   // Error=  TypeError: Cannot read properties of undefined (reading 'status')
             }

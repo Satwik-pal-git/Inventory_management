@@ -14,8 +14,10 @@ exports.getDetails = async (req, res) => {
 
 exports.setDetail = async (req, res) => {
     const formData = req.body;
+
     if (formData.length === 1) {
         try {
+            console.log("entered");
             await Detail.deleteOne({ _id: formData[0] });
             console.log("data deleted successfully");
             res.status(200).json({

@@ -38,30 +38,30 @@ const AddItem = ({closeModal})=>{
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response= await Axios.post(BASE_URL, formData, {
+            await Axios.post(LOCAL_URL, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }
             });
-            if(response.status===200)
-            {
-                // console.log("data is sent to server");
-                setFormData({ 
-                    img: '',
-                    itemName: '',
-                    category: '',
-                    itemCode: '',
-                    itemDescription: '',
-                    unit: '',
-                    openingStock: '',
-                    date: '',
-                    purchasePrice: '',
-                    tax: '',
-                });
-                closeModal();
-            }else {
-                console.log("data is not sent to server");
-            }
+            setFormData({ 
+                img: '',
+                itemName: '',
+                category: '',
+                itemCode: '',
+                itemDescription: '',
+                unit: '',
+                openingStock: '',
+                date: '',
+                purchasePrice: '',
+                tax: '',
+            });
+            closeModal();
+            // if(response.status===200)
+            // {
+            //     // console.log("data is sent to server");
+            // }else {
+            //     console.log("data is not sent to server");
+            // }
         } catch (error) {
             console.log('error =', error);            
         }

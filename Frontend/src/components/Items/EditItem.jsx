@@ -37,35 +37,30 @@ const AddItem = ({closeModalEdit, inventData})=>{
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log("invent= ", inventData);
+            // console.log("invent= ", inventData);
             const newData = {...formData, itemId: inventData._id}; 
             // setFormData({...formData, itemId: inventData._id});
-            console.log(newData);
-            console.log("in edit=", newData.itemId);
-            const response= await Axios.post(BASE_URL, newData, {
+            // console.log(newData);
+            // console.log("in edit=", newData.itemId);
+            await Axios.post(BASE_URL, newData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }
             });
-            if(response.status===200)
-            {
-                console.log("data is updated to server");
-                setFormData({ 
-                    img: '',
-                    itemName: '',
-                    category: '',
-                    itemCode: '',
-                    itemDescription: '',
-                    unit: '',
-                    openingStock: '',
-                    date: '',
-                    purchasePrice: '',
-                    tax: '',
-                });
-                closeModalEdit();
-            }else {
-                console.log("data is not sent to server");
-            }
+            console.log("data is updated to server");
+            setFormData({ 
+                img: '',
+                itemName: '',
+                category: '',
+                itemCode: '',
+                itemDescription: '',
+                unit: '',
+                openingStock: '',
+                date: '',
+                purchasePrice: '',
+                tax: '',
+            });
+            closeModalEdit();
         } catch (error) {
             console.log('error =', error);            
         }
