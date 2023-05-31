@@ -20,7 +20,7 @@ const LOCAL_URL="http://localhost:5000";
 //   { id:9, checked: false, itemName: "Warree", itemCode:506 , Category: "Panel", stockQty: "40 Unit", stockHold:"0 Unit", stockValue: 0, purchasePrice:0 },
 // ];
 
-const ShowItems=()=>{
+const ShowItems=({buttonData})=>{
   const [data, setData]= useState([]);  
   const [Modal, setModal]= useState(false);
   const [stockModal, setStockModal]= useState(false);
@@ -35,7 +35,6 @@ const ShowItems=()=>{
     })
   },[data]);
 
-  const [checkboxes, setCheckboxes] = useState(data);
   // const [checkboxAll, setcheckboxAll] = useState(false);
   // const handleAllCheckboxChange= ()=>{
   // };
@@ -61,13 +60,15 @@ const ShowItems=()=>{
     };
 
     const handleCheckboxChange = (id) => {
-      const updatedCheckboxes = checkboxes.map((checkbox) => {
-      if (checkbox.id === id) {
-        return { ...checkbox, checked: !checkbox.checked };
-      }
-      return checkbox;
-    });
-    setCheckboxes(updatedCheckboxes);
+      const updatedCheckboxes = data.map((checkbox) => {
+        // console.log(checkbox);
+        if (checkbox._id === id) {
+          buttonData(id);
+
+        }
+      });
+    // setCheckboxes(updatedCheckboxes);
+    // console.log(checkboxes);
   };
 
     return (
@@ -97,13 +98,13 @@ const ShowItems=()=>{
       <tbody className="Body">
         {/* Table rows */}
         {data.map((element)=>(
-          <tr key={element.id}>
+          <tr key={element._id}>
           <td>
             <div>
             <input
               type="checkbox"
               checked={element.checked}
-              onChange={() => handleCheckboxChange(element.id)}
+              onChange={() => handleCheckboxChange(element._id)}
             />
             </div>
           </td>

@@ -29,3 +29,10 @@
     border: none;
     border-radius: 5px;
 }
+.delete :disabled{
+    color: black;
+}
+.delete:enabled{
+    color: rgb(221, 77, 77);
+    border: 1px solid rgb(221, 77, 77);
+}
