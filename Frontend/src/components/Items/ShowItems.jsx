@@ -64,7 +64,7 @@ const ShowItems=({buttonData})=>{
         // console.log(checkbox);
         if (checkbox._id === id) {
           buttonData(id);
-
+          
         }
       });
     // setCheckboxes(updatedCheckboxes);
