@@ -38,7 +38,7 @@ const AddItem = ({closeModal})=>{
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await Axios.post(LOCAL_URL, formData, {
+            await Axios.post(BASE_URL, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }
