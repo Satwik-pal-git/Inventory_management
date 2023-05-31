@@ -40,7 +40,9 @@ const AddItem = ({closeModal})=>{
         try {
             await Axios.post(BASE_URL, formData, {
                 headers: {
-                    "Content-Type": "multipart/form-data"
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
                 }
             });
             setFormData({ 

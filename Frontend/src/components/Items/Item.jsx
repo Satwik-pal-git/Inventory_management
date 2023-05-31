@@ -37,7 +37,11 @@ const Item = () => {
         {
             try {
                 // console.log("in delete = ", deleteId);
-                await Axios.post(BASE_URL, [deleteId]);
+                await Axios.post(BASE_URL, [deleteId], {
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
+                });
                 setDisabledButton(true);
             } catch (error) {
                 console.log("Error= ", error);   // Error=  TypeError: Cannot read properties of undefined (reading 'status')

@@ -44,7 +44,10 @@ const AddItem = ({closeModalEdit, inventData})=>{
             // console.log("in edit=", newData.itemId);
             await Axios.post(BASE_URL, newData, {
                 headers: {
-                    "Content-Type": "multipart/form-data"
+                    "Content-Type": "multipart/form-data",
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
+
                 }
             });
             console.log("data is updated to server");

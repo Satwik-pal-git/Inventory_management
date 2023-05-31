@@ -22,7 +22,11 @@ const EditStock = ({closeStockModal, stockData})=> {
         try {
             editedData.openingStock= stockQty;
             // setEditedData({...editedData, [editedData.openingStock]:stockQty});
-            await Axios.post(BASE_URL, editedData);
+            await Axios.post(BASE_URL, editedData, {
+                "Content-Type": "multipart/form-data",
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+            });
             setEditedData({});
             closeStockModal();
         } catch (error) {
