@@ -40,7 +40,7 @@ const detailSchema = new mongoose.Schema({
     },
     tax: {
         type: String,
-        enum: ['NONE', 'Exempted', 'gst 0', 'gst 0.1', 'gst 0.25', 'gst 3', 'gst 5', 'gst 12'],
+        enum: ['None', 'Exempted', 'gst 0', 'gst 0.1', 'gst 0.25', 'gst 3', 'gst 5', 'gst 12'],
         required: true,
     }
 

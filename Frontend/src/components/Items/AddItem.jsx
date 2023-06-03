@@ -3,13 +3,12 @@ import "./AddItem.css";
 import "./InputLabel.css";
 import Axios from "axios";
 import { SlClose } from "react-icons/sl";
-
-const BASE_URL="https://inventory-management-backend-nine.vercel.app/";
-const LOCAL_URL="http://localhost:5000";
+import PreLoader from "./Preloader";
 
 
 const AddItem = ({closeModal})=>{
     const [selectedImage, setSelectedImage] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         img: '',
@@ -35,10 +34,17 @@ const AddItem = ({closeModal})=>{
         setSelectedImage(URL.createObjectURL(file));
     };
 
+    const preLaoder = () => {
+        setLoading(true);
+        // setTimeout(() => {
+        //     setLoading(false);
+        // }, 9000);
+    };
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await Axios.post(BASE_URL, formData, {
+            await Axios.post(process.env.REACT_APP_URL, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     'Access-Control-Allow-Origin': '*',
@@ -57,7 +63,7 @@ const AddItem = ({closeModal})=>{
                 purchasePrice: '',
                 tax: '',
             });
-            closeModal();
+            closeModal();            
             // if(response.status===200)
             // {
             //     // console.log("data is sent to server");
@@ -70,6 +76,8 @@ const AddItem = ({closeModal})=>{
       };
 
     return (
+        <>
+        {loading && <PreLoader/>}
         <div className="Modal">
             <form onSubmit={handleSubmit} className="formToAdd">
                 <div className="MyModal">
@@ -179,12 +187,13 @@ const AddItem = ({closeModal})=>{
                         </div>
                     </div>
                     <div className="buttons">
-                        <button className="" type="submit" >SAVE</button>
+                        <button className="" type="submit" onClick={preLaoder}>SAVE</button>
                         <button className="reset" > RESET</button>
                     </div>
                 </div>
             </form>
         </div>
+        </>
     );
 }
 

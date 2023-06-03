@@ -2,15 +2,18 @@ import React, {useState} from 'react';
 import "./InputLabel.css";
 import "./EditStock.css";
 import Axios from "axios";
+import PreLoader from './Preloader';
 
-const BASE_URL="https://inventory-management-backend-nine.vercel.app/";
-const LOCAL_URL="http://localhost:5000";
 
 
 const EditStock = ({closeStockModal, stockData})=> {
     const [stockQty, setStockQty] = useState();
     const [editedData, setEditedData] = useState(stockData);
+    const [loading, setLoading] = useState(false);
 
+    const preLaoder= () => {
+        setLoading(true);
+    };
     const handleInputChange = (e) => {
         setStockQty(e.target.value);
     };
@@ -22,19 +25,22 @@ const EditStock = ({closeStockModal, stockData})=> {
         try {
             editedData.openingStock= stockQty;
             // setEditedData({...editedData, [editedData.openingStock]:stockQty});
-            await Axios.post(BASE_URL, editedData, {
+            await Axios.post(process.env.REACT_APP_URL, editedData, {
                 "Content-Type": "multipart/form-data",
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
             });
             setEditedData({});
             closeStockModal();
+            setLoading(false);
         } catch (error) {
             console.log(error);
         }
     }
 
     return (
+        <>
+        {loading && <PreLoader/>}
         <div className="EditModal">
             <form className="formToEdit" onSubmit={submitHandler}>
                 <div className="headtxt">
@@ -52,11 +58,12 @@ const EditStock = ({closeStockModal, stockData})=> {
                     </div>
                     <div className="stock_buttons">
                         <button className="cancel_stock" onClick={closeModal}> CANCEL</button>
-                        <button className="edit_stock" type="submit" >EDIT</button>
+                        <button className="edit_stock" type="submit" onClick={preLaoder}>EDIT</button>
                     </div>                    
                 </div>
             </form>
         </div>
+        </>
     );
 }
 export default EditStock;

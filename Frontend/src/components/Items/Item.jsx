@@ -5,9 +5,7 @@ import AddItem from "./AddItem";
 import { AiTwotoneDelete } from "react-icons/ai";
 import ShowItems from "./ShowItems"
 import Axios from "axios";
-
-const BASE_URL="https://inventory-management-backend-nine.vercel.app/";
-const LOCAL_URL="http://localhost:5000";
+import PreLoader from "./Preloader";
 
 const options = [
     { 
@@ -25,6 +23,8 @@ const Item = () => {
     const [showModal, setShowModal]= useState(false);
     const [disabledButton, setDisabledButton] = useState(true);
     const [deleteId, setDeleteId] = useState();
+    const [loading, setLoading] = useState(false);
+
 
     const setModal = ()=>{
         setShowModal(true);
@@ -37,12 +37,16 @@ const Item = () => {
         {
             try {
                 // console.log("in delete = ", deleteId);
-                await Axios.post(BASE_URL, [deleteId], {
+                await Axios.post(process.env.REACT_APP_URL, [deleteId], {
                     "Content-Type": "multipart/form-data",
                     'Access-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json',
                 });
+                setLoading(true);
                 setDisabledButton(true);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 2000);
             } catch (error) {
                 console.log("Error= ", error);   // Error=  TypeError: Cannot read properties of undefined (reading 'status')
             }
@@ -61,6 +65,7 @@ const Item = () => {
 
       return (
           <>
+          {loading && <PreLoader/>}
             <div className="Stock_filter">
                 <div className="modal">
                     {showModal && <AddItem closeModal={closeModal}/>}

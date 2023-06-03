@@ -4,9 +4,8 @@ import EditItem from "./EditItem";
 import EditStock from "./EditStock";
 import Axios from "axios";
 import { MdModeEditOutline } from "react-icons/md";
-
-const BASE_URL="https://inventory-management-backend-nine.vercel.app/";
-const LOCAL_URL="http://localhost:5000";
+import PreLoader from "./Preloader";
+// import {REACT_APP_URL} from "../../../.env";
 
 // const tableData=[
 //   { id:1, checked: false, itemName: "Warree", itemCode:506 , Category: "Panel", stockQty: "40 Unit", stockHold:"0 Unit", stockValue: 0, purchasePrice:0 },
@@ -26,10 +25,13 @@ const ShowItems=({buttonData})=>{
   const [stockModal, setStockModal]= useState(false);
   const [inventData, setInventData]= useState({});
   const [stockData, setStockData]= useState({});
+  const [loading, setLoading] = useState(true);
+
   
   useEffect(()=>{
-    Axios.get(BASE_URL).then((response)=>{
+    Axios.get(process.env.REACT_APP_URL).then((response)=>{
       setData(response.data);
+      setLoading(false);
     }).catch((error)=>{
       console.log(error);
     })
@@ -64,7 +66,6 @@ const ShowItems=({buttonData})=>{
         // console.log(checkbox);
         if (checkbox._id === id) {
           buttonData(id);
-          
         }
       });
     // setCheckboxes(updatedCheckboxes);
@@ -73,6 +74,7 @@ const ShowItems=({buttonData})=>{
 
     return (
       <>
+      {loading && <PreLoader/>}
       <table className="Table">
       <thead className="header">
         <tr>
@@ -100,7 +102,7 @@ const ShowItems=({buttonData})=>{
         {data.map((element)=>(
           <tr key={element._id}>
           <td>
-            <div>
+            <div className="CheckBox">
             <input
               type="checkbox"
               checked={element.checked}

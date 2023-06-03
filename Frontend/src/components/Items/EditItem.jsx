@@ -3,12 +3,19 @@ import "./AddItem.css";
 import "./InputLabel.css";
 import Axios from "axios";
 import { SlClose } from "react-icons/sl";
-
-const BASE_URL="https://inventory-management-backend-nine.vercel.app/";
-const LOCAL_URL="http://localhost:5000";
+import PreLoader from "./Preloader";
 
 const AddItem = ({closeModalEdit, inventData})=>{
     const [selectedImage, setSelectedImage] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const preLaoder= () => {
+        setLoading(true);
+        // setTimeout(() => {
+        //     setLoading(false);
+        // }, 9000);
+    };
+
     // console.log("in editItem=, ", inventData);
     const [formData, setFormData] = useState({
         img: inventData.img,
@@ -42,7 +49,8 @@ const AddItem = ({closeModalEdit, inventData})=>{
             // setFormData({...formData, itemId: inventData._id});
             // console.log(newData);
             // console.log("in edit=", newData.itemId);
-            await Axios.post(BASE_URL, newData, {
+            // console.log(process.env.REACT_APP_URL);
+            await Axios.post(process.env.REACT_APP_URL, newData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     'Access-Control-Allow-Origin': '*',
@@ -70,6 +78,8 @@ const AddItem = ({closeModalEdit, inventData})=>{
       };
 
     return (
+        <>
+        {loading && <PreLoader/>}
         <div className="Modal">
             <form onSubmit={handleSubmit} className="formToAdd">
                 <div className="MyModal">
@@ -179,11 +189,12 @@ const AddItem = ({closeModalEdit, inventData})=>{
                         </div>
                     </div>
                     <div className="buttons">
-                        <button className="" type="submit" >EDIT</button>
+                        <button className="" type="submit" onClick={preLaoder}>EDIT</button>
                     </div>
                 </div>
             </form>
         </div>
+        </>
     );
 }
 
